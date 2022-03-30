@@ -72,15 +72,19 @@ def playlistGenCLI(songsPath, outputFile):
         PlayList_final = PlayList_final + clipsPlaylist[i]
         Medley_final = Medley_final + clipsMedley[i]
 
-    # export the final clip
-    OP = shlex.quote(os.path.dirname(outputFile)+"/playlist_"+os.path.basename(outputFile))
-    OM = shlex.quote(os.path.dirname(outputFile)+"/medley_"+os.path.basename(outputFile))
+    if "/" in outputFile:
+        OP = shlex.quote(os.path.dirname(outputFile)+"/playlist_"+os.path.basename(outputFile))
+        OM = shlex.quote(os.path.dirname(outputFile)+"/medley_"+os.path.basename(outputFile))
+    else:
+        OP = "playlist_"+os.path.basename(outputFile)
+        OM = "medley_"+os.path.basename(outputFile)
 
     extFinalClip = getFileExt(outputFile)
     print(f"\n+-----------------------------------+\nResulting audio files exported to: \n -> {OP} \n -> {OM}\n+-----------------------------------+\n")
     PlayList_final.export(OP, format=extFinalClip)
     Medley_final.export(OM, format=extFinalClip)
     os.system("open " + shlex.quote(os.path.dirname(outputFile)))
+
 
 ###### clear screen in terminal ##################################################################
 def getFileExt(filename):
