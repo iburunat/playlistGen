@@ -13,3 +13,5 @@ Usage:
 User-GUI 
 Usage: 
 ```pythonw playlistGen.py```
+
+![](images/playlistGen.jpg)
